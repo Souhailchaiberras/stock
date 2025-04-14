@@ -22,7 +22,7 @@ namespace API2.Repository
 
         public async  Task<Stock?> deleteAsync(int id)
         {
-         var  exist = await _context.Stock.FirstOrDefaultAsync(Stock => Stock.Id == id);
+         var  exist = await _context.Stock.Include(s=>s.Comments).FirstOrDefaultAsync(Stock => Stock.Id == id);
             if (exist == null)
             {
                 return null;
@@ -32,27 +32,18 @@ namespace API2.Repository
             return exist;
         }
 
-        public Task<List<Stock>> GetAllAsync()
+        public async Task<List<Stock>> GetAllAsync()
         {
-            return _context.Stock.ToListAsync();
+            return await _context.Stock.Include(s => s.Comments).ToListAsync();
         }
         public async Task<Stock?> GetByIdAsync(int id)
         {
-            try
-            {
-                // Option 1: Using FirstOrDefaultAsync (more flexible)
-                return await _context.Stock
-                    .FirstOrDefaultAsync(s => s.Id == id);
+            return await _context.Stock.FirstOrDefaultAsync(s => s.Id == id);
+        }
 
-                // OR Option 2: Using FindAsync (requires proper primary key setup)
-                // return await _context.Stock.FindAsync(id);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception (you should have a logger injected)
-                // _logger.LogError(ex, "Error getting stock by ID {Id}", id);
-                throw; // Re-throw or handle as needed
-            }
+        public async Task<bool> stockexict(int id)
+        {
+            return await _context.Stock.AnyAsync(s => s.Id == id);
         }
 
         public async Task<Stock?> updateAsync(int id, UpdateRequestDTO stockDto)

@@ -35,18 +35,18 @@ namespace API2.Controllers
         }
         [HttpGet("name/{name}")]
         public IActionResult GetByName([FromRoute] string name) { 
-             var stock = _context.Stock.FirstOrDefault(stock => stock.Companyname == name);
+             var stock = _context.Stock.Include(c=>c.Comments).FirstOrDefault(stock => stock.Companyname == name);
             if(stock == null)
             {
                 return NotFound();
             }
-            return Ok(stock);
+            return Ok(stock.ToStockDto());
 
         }
         [HttpGet("symbole/{symbole}")]
         public IActionResult GetBysymbole([FromRoute] string symbole)
         {
-            var stock = _context.Stock.FirstOrDefault(stock => stock.Symbol == symbole);
+            var stock = _context.Stock.Include(c => c.Comments).FirstOrDefault(stock => stock.Symbol == symbole);
             if (stock == null)
             {
                 return NotFound();
@@ -104,6 +104,7 @@ namespace API2.Controllers
             return NoContent();
 
         }
+        
 
     }
 

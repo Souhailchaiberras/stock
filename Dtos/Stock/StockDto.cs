@@ -1,4 +1,5 @@
 ﻿using API2.Models;
+using API2.Dtos.Comment;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API2.Dtos.Stock
@@ -17,7 +18,7 @@ namespace API2.Dtos.Stock
         public decimal LastDiv { get; set; }
         public string Industry { get; set; } = string.Empty;
         public long MarketCap { get; set; }
-        
+        public List<CommentDto> Comment { get; set; }
 
     }
 }

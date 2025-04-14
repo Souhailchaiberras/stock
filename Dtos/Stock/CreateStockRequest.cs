@@ -8,10 +8,7 @@ namespace API2.Dtos.Stock
        
         public string Symbol { get; set; } = string.Empty;
         public string Companyname { get; set; } = string.Empty;
-
-        
         public decimal Purchace { get; set; }
-        
         public decimal LastDiv { get; set; }
         public string Industry { get; set; } = string.Empty;
         public long MarketCap { get; set; }

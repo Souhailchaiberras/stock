@@ -8,6 +8,8 @@ namespace API2.Models
         public string Symbol { get; set; } = string.Empty;
         public string Companyname { get; set; } = string.Empty;
 
+     
+
         [Column(TypeName = "decimal(18;2)")]
         public decimal Purchace { get; set; }
         [Column(TypeName = "decimal(18;2)")]

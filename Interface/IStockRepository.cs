@@ -12,6 +12,7 @@ namespace API2.Interface
         Task<Stock?> createAsync(Stock stockmodel);
         Task<Stock?> updateAsync(int id , UpdateRequestDTO stockDto);
         Task<Stock?> deleteAsync(int id);
+        Task<bool> stockexict(int id);
 
     }
 }
