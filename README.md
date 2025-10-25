@@ -1,4 +1,5 @@
 ﻿# Stock Project
-il permet la gestion des st
+il permet la gestion des stocks
+
 
 
